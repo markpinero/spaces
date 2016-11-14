@@ -44,9 +44,9 @@ function drawResults(query, location) {
 }
 
 function getIpLocation() {
-	$.getJSON("http://ip-api.com/json/?callback=?", function(data) {
-		$('.js-location').val(data.city + ', ' + data.region);
-    drawMap(data.lat, data.lon);
+	$.getJSON("https://freegeoip.net/json/", function(data) {
+		$('.js-location').val(data.city + ', ' + data.region_code);
+    drawMap(data.latitude, data.longitude);
   });
 }
 
