@@ -44,7 +44,7 @@ function drawResults(query, location) {
 }
 
 function getIpLocation() {
-	$.getJSON("https://ip-api.com/json/?callback=?", function(data) {
+	$.getJSON("http://ip-api.com/json/?callback=?", function(data) {
 		$('.js-location').val(data.city + ', ' + data.region);
     drawMap(data.lat, data.lon);
   });
