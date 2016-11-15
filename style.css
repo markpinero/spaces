@@ -26,9 +26,9 @@ h1, h2, h3, ul, li {
 }
 
 #map {
-	margin-left: 40%;
+	margin-left: 33.3%;
 	height: 100%;
-	width: 60%;
+	width: 66.6%;
 	z-index: 1;
 }
 
@@ -86,7 +86,7 @@ h1, h2, h3, ul, li {
 	overflow-y: scroll;
 	float: left;
 	height: 100%;
-	width: 40%;
+	width: 33.3%;
 }
 
 .filters h1 {
@@ -112,6 +112,7 @@ h1, h2, h3, ul, li {
 
 #results li:hover {
 	background: #efefef;
+	cursor: pointer;
 }
 #results li:last-child {
 	border-bottom: 0;
