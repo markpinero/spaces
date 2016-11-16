@@ -9,6 +9,7 @@ html, body {
 h1, h2, h3, ul, li {
 	margin: 0;
 	padding: 0;
+	font-family: "Roboto";
 }
 
 .container {
@@ -21,24 +22,28 @@ h1, h2, h3, ul, li {
 	left: 0;
 	top: 0;
 	z-index: 100;
-	background: #fff;
+	background: url('https://ioucentralinc.files.wordpress.com/2014/10/coffee-shop-office.jpg') no-repeat;
+	background-size: cover;
 	transition: transform 0.5s ease-in, opacity 0.5s ease;
 }
 
 #map {
-	margin-left: 33.3%;
 	height: 100%;
-	width: 66.6%;
+	width: 40%;
+	margin-left: 40%;
 	z-index: 1;
 }
 
 #search-box {
 	position: absolute;
 	top: 50%;
-	width: 100%;
-	background: rgba(255, 0, 0, 0.4);
+	left: 50%;
+	width: 60%;
+	margin-left: -30%;
+	background: #ffffff;
+	box-shadow: 0px 10px 75px rgba(0, 0, 0, 0.8);
 	margin-top: -101px;
-	padding: 20px;
+	padding: 40px;
 }
 
 #search-box form {
@@ -50,27 +55,25 @@ h1, h2, h3, ul, li {
 #search-box h1 {
 	margin: 0 0 10px;
 	padding: 0;
-	font-size: 20px;
+	font-size: 40px;
+	font-weight: 900;
 }
 
 #search-box input, #search-box button {
-	border: 0;
-	border-radius: 3px;
+	display: block;
+	width: 400px;
+	margin: 15px auto;
 	padding: 15px;
-}
-
-#search-box .query {
-	width: 300px;
-}
-
-#search-box .location {
-	width: 200px;
-	margin-right: 10px;
+	border: 1px rgba(0, 0, 0, 0.1) solid;
+	border-radius: 3px;
+	text-align: center;
 }
 
 #search-box button {
-	background: #73cf42;
+	background: #49546c;
 	color: #ffffff;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .hide {
@@ -83,10 +86,11 @@ h1, h2, h3, ul, li {
 }
 
 #sidebar {
-	overflow-y: scroll;
 	float: left;
+	overflow-y: auto;
 	height: 100%;
-	width: 33.3%;
+	width: 60%;
+	background: url('asanoha-400px.png');
 }
 
 .filters h1 {
@@ -99,21 +103,39 @@ h1, h2, h3, ul, li {
 }
 
 #results {
-	margin: 20px;
+	padding: 20px;
 }
 
 #results li {
+	float: left;
+	width: 50%;
 	list-style-type: none;
-	padding: 20px;
+}
+
+.venue {
+	margin: 10px;
 	border-radius: 3px;
-	border-bottom: 1px #e3e3e3 solid;
 	transition: background 0.3s ease;
 }
 
-#results li:hover {
+.venue:hover {
 	background: #efefef;
 	cursor: pointer;
 }
-#results li:last-child {
-	border-bottom: 0;
+
+.venue .photo {
+	overflow: hidden;
+	height: 300px;
+}
+
+.venue img {
+	position: relative;
+	top: 50%;
+	width: 100%;
+	transform: translateY(-50%);
+}
+
+.venue .details {
+	background: #fff;
+	padding: 20px;
 }

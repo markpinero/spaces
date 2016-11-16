@@ -5,15 +5,16 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <div id="search" class="search container">
     <section id="search-box">
       <form>
-            <h1>Search</h1>
+        <h1>Find a place to work</h1>
         <input type="text" class="query" placeholder="I'm looking for..." value="Starbucks" required>
-            <input type="text" class="js-location location" name="location">
+        <input type="text" class="js-location location" name="location" placeholder="At current location...">
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
       </form>
     </section>
@@ -21,7 +22,6 @@
   <div id="map-results" class="container">
     <section id="sidebar">
       <div class="filters">
-        <h1>Suggestions for <strong class='js-query'></strong> near <strong class='js-location-name'></strong></h1>
       </div>
       <ul id="results"></ul>
     </section>
