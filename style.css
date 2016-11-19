@@ -59,7 +59,7 @@ h1, h2, h3, ul, li {
 	font-weight: 900;
 }
 
-#search-box input, #search-box button {
+#search-box input[type="text"], #search-box button {
 	display: block;
 	width: 400px;
 	margin: 15px auto;
@@ -79,6 +79,16 @@ h1, h2, h3, ul, li {
 .hide {
 	transform: translateY(-100%);
 	opacity: 0;
+}
+
+header {
+	margin: 20px;
+}
+
+header h1 {
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
 }
 
 #map-results {
@@ -103,17 +113,32 @@ h1, h2, h3, ul, li {
 }
 
 #results {
-	padding: 20px;
+	margin: 20px;
 }
 
 #results li {
 	float: left;
-	width: 50%;
+	width: 100%;
+	margin-bottom: 20px;
 	list-style-type: none;
 }
 
+@media screen and (min-width: 1200px) {
+
+	#results li {
+		float: left;
+		width: calc(50% - 10px);
+		margin-right: 20px;
+		list-style-type: none;
+	}
+
+	#results li:nth-child(even) {
+		margin-right: 0;
+	}
+
+}
+
 .venue {
-	margin: 10px;
 	border-radius: 3px;
 	transition: background 0.3s ease;
 }
@@ -125,7 +150,7 @@ h1, h2, h3, ul, li {
 
 .venue .photo {
 	overflow: hidden;
-	height: 300px;
+	height: 200px;
 }
 
 .venue img {

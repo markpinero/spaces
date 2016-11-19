@@ -1,7 +1,7 @@
 // https://api.foursquare.com/v2/venues/search?near=Northridge,+CA&query=mcdonalds&limit=10&client_id=GOCIDB0RL50MCE2X3G2DYRDXRAA1AMG2XF3R3ZJBRRXSNECL&client_secret=FX40PY51ZXGKUH04AWKQAXOUY3KIYSH1OCYNBHQWEY4OZ10N&v=20161110
 // AIzaSyA6A_ZqMsyzbR0ZHE-j8SScXUyqqTVgFxE
 
-// https://api.foursquare.com/v2/venues/explore?near=Northridge,+CA&query=mcdonalds&limit=10&venuePhotos=1&client_id=GOCIDB0RL50MCE2X3G2DYRDXRAA1AMG2XF3R3ZJBRRXSNECL&client_secret=FX40PY51ZXGKUH04AWKQAXOUY3KIYSH1OCYNBHQWEY4OZ10N&v=20161110
+// https://api.foursquare.com/v2/venues/explore?near=Northridge,+CA&section=coffee&limit=10&venuePhotos=1&client_id=GOCIDB0RL50MCE2X3G2DYRDXRAA1AMG2XF3R3ZJBRRXSNECL&client_secret=FX40PY51ZXGKUH04AWKQAXOUY3KIYSH1OCYNBHQWEY4OZ10N&v=20161110
 
 const CLIENT_ID = 'GOCIDB0RL50MCE2X3G2DYRDXRAA1AMG2XF3R3ZJBRRXSNECL';
 const CLIENT_SECRET = 'FX40PY51ZXGKUH04AWKQAXOUY3KIYSH1OCYNBHQWEY4OZ10N';
@@ -15,7 +15,7 @@ function panMapResult(lat, lon) {
 }
 
 function selectLocation() {
-  var index = $(this).data('venue');
+  var index = $(this).data('recommendation');
   var venue = results[index].venue;
   var lat = venue.location["lat"];
   var lon = venue.location["lng"];
@@ -27,60 +27,59 @@ function selectLocation() {
 
 $('#results').on('click', '.listing', selectLocation);
 
+// function clickPin() {
+
+// }
+
 function drawResults() {
   L.circle(loc, 200).addTo(map);
 
-  $.getJSON('https://api.foursquare.com/v2/venues/explore?ll=' + loc + '&section=coffee&limit=10&venuePhotos=1&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET + '&v=20161115',
+  $.getJSON('https://api.foursquare.com/v2/venues/explore?ll=' + loc["lat"] + ',' + loc["lon"] + '&section=coffee&limit=10&venuePhotos=1&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET + '&v=20161115',
   function(data) {
     results = data.response.groups[0].items;
-    $.each(results, function(i, v){ // index + data
-      photos = v.venue.photos.groups[0].items[0];
+    // filter = $.grep(results, function(recommendation) {
+    //   return recommendation.venue.categories[0].id === "4bf58dd8d48988d1e0931735";
+    // }); filter out
+    $.each(results, function(i, recommendation){
+      photos = recommendation.venue.photos.groups[0].items[0];
       content = $('<li class="listing"><div class="venue"><div class="photo"><img src="' + photos.prefix
         + "width400" + photos.suffix + '"></div><div class="details">' +
-        v.venue.name + '<br><address>' + v.venue.location["address"] + '</address></div></div></li>'
+        recommendation.venue.name + '<br><address>' + recommendation.venue.location["address"] + '</address></div></div></li>'
       );
-      content.data('venue', i);
-      var lat = v.venue.location.lat;
-      var lon = v.venue.location.lng;
+      content.data('recommendation', i);
+      var lat = recommendation.venue.location.lat;
+      var lon = recommendation.venue.location.lng;
 
-      v.venue.marker = L.marker([lat, lon]).addTo(map);
-      v.venue.marker.bindPopup(v.venue.name);
+      recommendation.venue.marker = L.marker([lat, lon]).addTo(map);
+      recommendation.venue.marker.bindPopup(recommendation.venue.name);
 
       content.appendTo("#results");
     });
   });
-}
 
-function getGeoLocation() {
+  // map.fitBounds([])
+}
+// ip default
+function getGeoLocation() { // error
   navigator.geolocation.getCurrentPosition(function(position) {
-    loc = [position.coords.latitude, position.coords.longitude];
-    drawMap(position.coords.latitude, position.coords.longitude);
+    loc = {
+      lat: position.coords.latitude,
+      lon: position.coords.longitude
+    };
+    map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 14);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVtYXJrcyIsImEiOiJjaXYxeTR0aXQwMGpzMnpvZTJwajZ6c3E5In0.wcSJhHXVS25LJuN744wlpA', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18
+    }).addTo(map);
   })
 }
 
-function getIpLocation() {
-  $.getJSON("https://freegeoip.net/json/", function(data) {
-    $('.js-location').val(data.city + ', ' + data.region_code);
-  });
-}
-
-function drawMap(lat, lon) {
-  map = L.map('map').setView([lat, lon], 14);
-
-  L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVtYXJrcyIsImEiOiJjaXYxeTR0aXQwMGpzMnpvZTJwajZ6c3E5In0.wcSJhHXVS25LJuN744wlpA', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      maxZoom: 18
-  }).addTo(map);
-
-}
-
 function startPage() {
-//  getIpLocation();
   getGeoLocation();
 }
 
 $('button').on('click', function(e) {
-  getGeoLocation();
   e.preventDefault();
   $('.search').addClass('hide');
 

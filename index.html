@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Search</title>
+  <title>Workspaces - Find the best cafes to work.</title>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -12,17 +12,19 @@
   <div id="search" class="search container">
     <section id="search-box">
       <form>
-        <h1>Find a place to work</h1>
-        <input type="text" class="query" placeholder="I'm looking for..." value="Starbucks" required>
-        <input type="text" class="js-location location" name="location" placeholder="At current location...">
+        <h1>Workspaces</h1>
+        <h2>Find a place to work</h2>
+        <!-- <input type="text" class="query" placeholder="I'm looking for..." value="Starbucks" required> -->
+        <label><input type="radio" class="js-location location" name="location" checked>At current location</label>
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
       </form>
     </section>
   </div>
   <div id="map-results" class="container">
     <section id="sidebar">
-      <div class="filters">
-      </div>
+      <header>
+        <h1>Workspaces</h1>
+      </header>
       <ul id="results"></ul>
     </section>
     <section id="map"></section>
