@@ -1,231 +1,197 @@
-*
-{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
+  line-height: 1.5em;
 }
 
-html,
-body
-{
-    height: 100%;
+html, body {
+  height: 100%;
 }
 
-h1,
-h2,
-h3,
-ul,
-li
-{
-    font-family: 'Roboto';
-
-    margin: 0;
-    padding: 0;
+h1, h2, h3, ul, li {
+  font-family: 'Roboto';
+  margin: 0;
+  padding: 0;
 }
 
-.container
-{
-    width: 100%;
-    height: 100%;
+.container {
+  width: 100%;
+  height: 100%;
 }
 
-#search
-{
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
-
-    transition: transform .5s ease-in, opacity .5s ease;
-
-    background: url('https://ioucentralinc.files.wordpress.com/2014/10/coffee-shop-office.jpg') no-repeat;
-    background-size: cover;
+#search {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  transition: transform 1s ease-in, opacity 1s ease;
+  background: url('https://source.unsplash.com/random');
+  background-size: cover;
+  background-position: center center;
 }
 
-.unslider
-{
-    display: inline-block;
+#map {
+  z-index: 1;
+  width: 40%;
+  height: 100%;
+  margin-left: 40%;
 }
 
-#map
-{
-    z-index: 1;
-
-    width: 40%;
-    height: 100%;
-    margin-left: 40%;
+#search-box {
+  position: relative;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50%;
+  padding: 40px;
+  background: #ffffff;
+  box-shadow: 0 10px 75px rgba(0, 0, 0, 0.8);
 }
 
-#search-box
-{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    width: 60%;
-    margin-top: -101px;
-    margin-left: -30%;
-    padding: 40px;
-
-    background: #fff;
-    box-shadow: 0 10px 75px rgba(0, 0, 0, .8);
+#search-box form {
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
 }
 
-#search-box form
-{
-    margin: 0 auto;
-    padding: 10px;
-
-    text-align: center;
+#search-box h1 {
+  font-size: 40px;
+  font-weight: 900;
+  margin: 0 0 10px;
+  padding: 0;
 }
 
-#search-box h1
-{
-    font-size: 40px;
-    font-weight: 900;
-
-    margin: 0 0 10px;
-    padding: 0;
+#search-box input[type='text'], #search-box button {
+  display: block;
+  width: 400px;
+  margin: 15px auto;
+  padding: 15px;
+  text-align: center;
+  border: 1px rgba(0, 0, 0, 0.1) solid;
+  border-radius: 3px;
 }
 
-#search-box input[type='text'],
-#search-box button
-{
-    display: block;
-
-    width: 400px;
-    margin: 15px auto;
-    padding: 15px;
-
-    text-align: center;
-
-    border: 1px rgba(0, 0, 0, .1) solid;
-    border-radius: 3px;
+#search-box button {
+  font-weight: bold;
+  cursor: pointer;
+  color: #ffffff;
+  background: #49546c;
 }
 
-#search-box button
-{
-    font-weight: bold;
-
-    cursor: pointer;
-
-    color: #fff;
-    background: #49546c;
+.hide {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
-.hide
-{
-    transform: translateY(-100%);
-
-    opacity: 0;
+header {
+  margin: 20px;
 }
 
-header
-{
-    margin: 20px;
+#map-results {
+  transition: transform ease-in;
 }
 
-header h1
-{
-    margin: 0;
-    padding: 0;
-
-    text-transform: uppercase;
+#sidebar {
+  float: left;
+  overflow-y: auto;
+  width: 60%;
+  height: 100%;
+  background: url('../img/asanoha-400px.png');
 }
 
-#map-results
-{
-    transition: transform ease-in;
+.filters h1 {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 3px;
+  background: #efeff4;
 }
 
-#sidebar
-{
+#results {
+  margin: 20px;
+}
+
+#results li {
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+
+@media screen and (min-width: 1200px) {
+  #results li {
     float: left;
-    overflow-y: auto;
-
-    width: 60%;
-    height: 100%;
-
-    background: url('../img/asanoha-400px.png');
-}
-
-.filters h1
-{
-    font-size: 16px;
-    font-weight: normal;
-
-    margin: 20px;
-    padding: 20px;
-
-    border-radius: 3px;
-    background: #efeff4;
-}
-
-#results
-{
-    margin: 20px;
-}
-
-#results li
-{
-    float: left;
-
-    width: 100%;
-    margin-bottom: 20px;
-
+    width: calc(50% - 10px);
+    margin-right: 20px;
     list-style-type: none;
+  }
+
+  #results li:nth-child(even) {
+    margin-right: 0;
+  }
 }
 
-@media screen and (min-width: 1200px)
-{
-    #results li
-    {
-        float: left;
-
-        width: calc(50% - 10px);
-        margin-right: 20px;
-
-        list-style-type: none;
-    }
-
-    #results li:nth-child(even)
-    {
-        margin-right: 0;
-    }
+.venue {
+  transition: background 0.3s ease;
+  background: #ffffff;
 }
 
-.venue
-{
-    transition: background .3s ease;
-
-    border-radius: 3px;
+.venue:hover {
+  cursor: pointer;
 }
 
-.venue:hover
-{
-    cursor: pointer;
-
-    background: #efefef;
+.photo {
+  height: 200px;
+  position: relative;
 }
 
-.venue .photo
-{
-    overflow: hidden;
-
-    height: 200px;
+.photo h1 {
+	position: absolute;
+	bottom: 0;
+	padding: 10px;
+	font-size: 18px;
 }
 
-.venue img
-{
-    position: relative;
-    top: 50%;
-
-    width: 100%;
-
-    transform: translateY(-50%);
+.details {
+  padding: 10px;
 }
 
-.venue .details
-{
-    padding: 20px;
+.photo:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(to bottom right,transparent,#000);
+	opacity: 0.7;
+}
 
-    background: #fff;
+.venue h1 {
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  width: 100%;
+}
+
+.details address {
+  font-size: 12px;
+  font-style: normal;
+}
+
+.directions {
+	float: right;
+	padding: 6px 20px;
+	font-weight: bold;
+	vertical-align: middle;
+	text-decoration: none;
+	background: #66CD00;
+	margin: 10px;
+	border-radius: 3px;
+	color: #fff;
+	transition: background 0.3s ease;
+}
+
+.directions:hover {
+	background: #4A7023;
 }
