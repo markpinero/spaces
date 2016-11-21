@@ -6,16 +6,18 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
   <div id="search" class="search container">
     <section id="search-box">
       <form>
         <h1>Workspaces</h1>
-        <h2>Find a place to work</h2>
+        <h2>
+          Find a great place to work
+        </h2>
         <!-- <input type="text" class="query" placeholder="I'm looking for..." value="Starbucks" required> -->
-        <label><input type="radio" class="js-location location" name="location" checked>At current location</label>
+        <!-- <label><input type="radio" class="js-location location" name="location" checked>At current location</label> -->
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
       </form>
     </section>
@@ -23,7 +25,10 @@
   <div id="map-results" class="container">
     <section id="sidebar">
       <header>
-        <h1>Workspaces</h1>
+        <h1>
+          Workspaces
+          <div class="filter"></div>
+        </h1>
       </header>
       <ul id="results"></ul>
     </section>
@@ -32,6 +37,6 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
-  <script src="app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

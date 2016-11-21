@@ -34,12 +34,11 @@ $('#results').on('click', '.listing', selectLocation);
 function drawResults() {
   L.circle(loc, 200).addTo(map);
 
-  $.getJSON('https://api.foursquare.com/v2/venues/explore?ll=' + loc["lat"] + ',' + loc["lon"] + '&section=coffee&limit=10&venuePhotos=1&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET + '&v=20161115',
+  $.getJSON('https://api.foursquare.com/v2/venues/explore?ll=' + loc["lat"] + ',' + loc["lon"] + '&section=coffee&venuePhotos=1&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET + '&v=20161115',
   function(data) {
-    results = data.response.groups[0].items;
-    // filter = $.grep(results, function(recommendation) {
-    //   return recommendation.venue.categories[0].id === "4bf58dd8d48988d1e0931735";
-    // }); filter out
+    results = $.grep(data.response.groups[0].items, function(recommendation) {
+      return recommendation.venue.name !== "7-Eleven";
+    }).slice(0, 10);
     $.each(results, function(i, recommendation){
       photos = recommendation.venue.photos.groups[0].items[0];
       content = $('<li class="listing"><div class="venue"><div class="photo"><img src="' + photos.prefix
@@ -56,27 +55,21 @@ function drawResults() {
       content.appendTo("#results");
     });
   });
-
-  // map.fitBounds([])
 }
-// ip default
-function getGeoLocation() { // error
+
+function getGeoLocation() {
   navigator.geolocation.getCurrentPosition(function(position) {
     loc = {
       lat: position.coords.latitude,
       lon: position.coords.longitude
     };
-    map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 14);
+    map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVtYXJrcyIsImEiOiJjaXYxeTR0aXQwMGpzMnpvZTJwajZ6c3E5In0.wcSJhHXVS25LJuN744wlpA', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18
     }).addTo(map);
   })
-}
-
-function startPage() {
-  getGeoLocation();
 }
 
 $('button').on('click', function(e) {
@@ -87,5 +80,5 @@ $('button').on('click', function(e) {
 });
 
 $(function() {
-  startPage();
+  getGeoLocation();
 });
