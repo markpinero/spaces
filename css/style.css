@@ -143,6 +143,7 @@ header {
 .photo {
   height: 200px;
   position: relative;
+  background-size: cover;
 }
 
 .photo h1 {
